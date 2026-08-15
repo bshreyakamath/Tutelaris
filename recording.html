@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tutelaris - Automatic Safety Recording</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='recording.css') }}">
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div class="header-inner">
+
+        <div class="brand-section">
+
+            <div class="shield">
+                🛡️
+            </div>
+
+            <div>
+                <div class="brand-name">
+                    TUTELARIS
+                </div>
+
+                <h1>
+                    Harassment Recording
+                </h1>
+
+                <p>
+                    Automatic evidence collection for your safety
+                </p>
+            </div>
+
+        </div>
+
+        <a href="/dashboard" class="dashboard-button">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="main-container">
+
+<section class="recording-card">
+
+    <!-- TITLE -->
+
+    <div class="title-section">
+
+        <div class="microphone-box">
+            🎙️
+        </div>
+
+        <div>
+
+            <span class="small-label">
+                SAFETY FEATURE
+            </span>
+
+            <h2>
+                Automatic Safety Recording
+            </h2>
+
+            <p>
+                Tutelaris monitors the microphone for possible
+                distress signals and automatically records audio
+                when a recognised distress word is detected.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- USER -->
+
+    <div class="user-card">
+
+        <div class="user-icon">
+            👤
+        </div>
+
+        <div class="user-details">
+
+            <span>
+                LOGGED-IN USER
+            </span>
+
+            <strong id="userName">
+                {{ user_name }}
+            </strong>
+
+        </div>
+
+        <div class="user-details">
+
+            <span>
+                USER ID
+            </span>
+
+            <strong id="userId">
+                {{ user_id }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- MONITOR STATUS -->
+
+    <div id="monitorStatus"
+         class="monitor-status active">
+
+        <div class="status-dot"></div>
+
+        <div>
+
+            <strong id="monitorTitle">
+                Safety Monitoring Active
+            </strong>
+
+            <p id="monitorText">
+                Automatically monitoring microphone
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- AUDIO ANALYSIS -->
+
+    <div class="audio-card">
+
+        <div class="section-title">
+            🎧
+            <span>
+                Audio Analysis
+            </span>
+        </div>
+
+
+        <div class="audio-row">
+
+            <span>
+                Microphone
+            </span>
+
+            <strong id="microphoneStatus">
+                Starting...
+            </strong>
+
+        </div>
+
+
+        <div class="audio-row">
+
+            <span>
+                Speech Detection
+            </span>
+
+            <strong id="speechStatus">
+                Waiting
+            </strong>
+
+        </div>
+
+
+        <div class="audio-row">
+
+            <span>
+                Detection
+            </span>
+
+            <strong id="detectionStatus">
+                Starting...
+            </strong>
+
+        </div>
+
+
+        <!-- DANGER BOX -->
+
+        <div id="dangerBox"
+             class="danger-box safe">
+
+            <div id="dangerIcon"
+                 class="danger-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <strong id="dangerTitle">
+                    No danger detected
+                </strong>
+
+                <p id="dangerMessage">
+                    Automatic monitoring is active.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECORDING BOX -->
+
+        <div id="recordingBox"
+             class="recording-box">
+
+            <div class="recording-dot"></div>
+
+            <div>
+
+                <strong>
+                    Evidence recording in progress
+                </strong>
+
+                <p>
+                    Tutelaris is automatically recording
+                    the detected incident.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESULT BOX -->
+
+        <div id="resultBox"
+             class="result-box">
+
+            <strong id="resultTitle">
+                Evidence Status
+            </strong>
+
+            <p id="resultMessage">
+                Waiting for an incident.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOCATION -->
+
+    <div class="location-card">
+
+        <div class="location-icon">
+            📍
+        </div>
+
+        <div class="location-content">
+
+            <h3>
+                Location
+            </h3>
+
+            <p id="locationStatus">
+                Waiting for location permission...
+            </p>
+
+
+            <div class="location-details">
+
+                <div>
+                    <span>
+                        Latitude
+                    </span>
+
+                    <strong id="latitude">
+                        —
+                    </strong>
+                </div>
+
+
+                <div>
+                    <span>
+                        Longitude
+                    </span>
+
+                    <strong id="longitude">
+                        —
+                    </strong>
+                </div>
+
+
+                <div>
+                    <span>
+                        Accuracy
+                    </span>
+
+                    <strong id="accuracy">
+                        —
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <div class="information-box">
+
+        <span>
+            🔒
+        </span>
+
+        <p>
+            Monitoring runs automatically while this page is open.
+            Recognised distress words are detected when browser
+            speech recognition is available. If a distress word is
+            detected, Tutelaris automatically records a short audio
+            clip and sends the evidence and available location
+            information to the Flask server.
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+    Tutelaris Safety System • Automatic Protection
+</footer>
+
+</main>
+
+
+<script src="{{ url_for('static', filename='recording.js') }}"></script>
+
+</body>
+</html>
