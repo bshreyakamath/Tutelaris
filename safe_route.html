@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tutelaris - Safe Route Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='safe_route_style.css') }}">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div class="header-left">
+
+                <p class="brand">TUTELARIS</p>
+
+                <h1>Safe Route Assistant</h1>
+
+                <p class="subtitle">
+                    Find the nearest police station and get a safe route.
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('dashboard') }}" class="back-btn">
+    ← Dashboard
+</a>
+
+        </header>
+
+
+        <!-- MAIN -->
+        <main class="content">
+
+            <!-- POLICE STATION CARD -->
+            <section class="safety-card">
+
+                <div class="icon">
+                    🚔
+                </div>
+
+                <h2>
+                    Nearby Police Station
+                </h2>
+
+                <p class="description">
+                    Allow location access to find a nearby police station
+                    and open navigation.
+                </p>
+
+
+                <!-- LOCATION BUTTON -->
+                <button
+                    id="locationBtn"
+                    class="primary-btn"
+                    onclick="findPoliceStation()"
+                >
+                    📍 Find Nearest Police Station
+                </button>
+
+
+                <!-- STATUS -->
+                <div
+                    id="status"
+                    class="status hidden"
+                ></div>
+
+
+                <!-- RESULT -->
+                <div
+                    id="result"
+                    class="result hidden"
+                >
+
+                    <!-- LOCATION -->
+                    <div class="info-row">
+
+                        <span>
+                            📍 Your Location
+                        </span>
+
+                        <strong id="coordinates">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <!-- STATION -->
+                    <div class="station-box">
+
+                        <span class="station-icon">
+                            🚔
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Nearest Police Station
+                            </h3>
+
+                            <p id="stationText">
+                                Police station near your current location
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ROUTE -->
+                    <button
+                        id="routeBtn"
+                        class="route-btn"
+                        onclick="openRoute()"
+                    >
+                        🗺️ Get Route in Google Maps
+                    </button>
+
+                </div>
+
+
+                <!-- PRIVACY -->
+                <div class="privacy">
+
+                    🔒 Your location is used only to find the route
+                    and is not stored by this front-end prototype.
+
+                </div>
+
+            </section>
+
+
+            <!-- HOW IT WORKS -->
+            <section class="steps">
+
+                <h2>
+                    How it works
+                </h2>
+
+
+                <div class="step-grid">
+
+                    <!-- STEP 1 -->
+                    <div class="step">
+
+                        <span>
+                            1
+                        </span>
+
+                        <h3>
+                            Share Location
+                        </h3>
+
+                        <p>
+                            Allow the browser to access your current GPS
+                            location.
+                        </p>
+
+                    </div>
+
+
+                    <!-- STEP 2 -->
+                    <div class="step">
+
+                        <span>
+                            2
+                        </span>
+
+                        <h3>
+                            Find Station
+                        </h3>
+
+                        <p>
+                            The app searches Google Maps for police
+                            stations nearby.
+                        </p>
+
+                    </div>
+
+
+                    <!-- STEP 3 -->
+                    <div class="step">
+
+                        <span>
+                            3
+                        </span>
+
+                        <h3>
+                            Get Route
+                        </h3>
+
+                        <p>
+                            Open the route in Google Maps for navigation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='safe_route_script.js') }}"></script>
+
+</body>
+</html>

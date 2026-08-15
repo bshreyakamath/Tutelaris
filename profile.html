@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+    body{
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            margin:0;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+            background-color: #dbcee2;
+            background-image: 
+        radial-gradient(ellipse 100% 50% at 50% -20%, rgba(241, 241, 241, 0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 40% at 50% 120%, rgba(252, 252, 252, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+        linear-gradient(225deg, rgba(136, 60, 171, 0.05) 50%, transparent 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+        }
+        pre{
+            font-family: 'Inter', sans-serif;
+        }
+    .navbar p {
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .navbar {
+            background-color: #5b2383;
+            color: white;
+            padding: 15px 20px; 
+            margin-bottom:50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative; 
+        }
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+            width: 100%;
+        }
+        .profile-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin:50px;
+            overflow: hidden;
+            border: 4px solid #ffffff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .profile-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-container:hover .profile-img {
+            display:flex;
+            transform: scale(1.08);
+            align-items: center;
+            justify-content: center;
+        }
+        .details {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(91, 35, 131, 0.08);
+            width: 100%;
+            max-width: 520px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .details h2 {
+            margin-top: 0;
+            margin-bottom: 24px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #2b1d3a;
+            letter-spacing: -0.3px;
+            border-bottom: 2px solid #f3eff7;
+            padding-bottom: 12px;
+        }
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: #4a4a4a;
+        }
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-item svg {
+            width: 20px;
+            height: 20px;
+            fill: #5b2383;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #2b1d3a;
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        .detail-value {
+            color: #555555;
+            word-break: break-all;
+        }
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                padding: 30px 15px;
+                gap: 30px;
+            }
+            .details {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="navbar-brand">
+            <p>Profile</p>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="profile-container">
+            <img src="{{ url_for('static', filename='profilegirl.png') }}" alt="Profile Picture" class="profile-img">
+        </div>
+
+        <div class="details">
+            <h2>Personal Information</h2>
+            
+            <div class="detail-item">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <span class="detail-label">Name:</span>
+                <span class="detail-value">Barbie</span>
+            </div>
+
+            <div class="detail-item">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <span class="detail-label">Email:</span>
+                <span class="detail-value">abc@gmail.com</span>
+            </div>
+
+            <div class="detail-item">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <span class="detail-label">Phone:</span>
+                <span class="detail-value">+91 xxxxxxxxxx</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
