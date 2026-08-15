@@ -1,365 +1,367 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>TutelarIS — Emergency Fake Call</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='fake_call_style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='fake_call_style.css') }}"
+    >
+
 </head>
+
 
 <body>
 
-    <div class="phone">
+<div class="phone">
 
-        <header>
-            <b>TUTELARIS</b>
-        </header>
+    <!-- HEADER -->
 
-        <main>
-
-            <!-- ==============================
-                 SETUP SCREEN
-            =============================== -->
-
-            <section id="setup" class="screen active">
-
-                <h1>Emergency Fake Call</h1>
-
-                <p class="sub">
-                    Save a trusted relative once, then start a discreet
-                    fake call quickly whenever you need it.
-                </p>
-
-                <!-- SAVED CONTACTS -->
-
-                <div id="savedArea" class="saved" style="display: none;">
-
-                    <h3>Saved people</h3>
-
-                    <div id="contacts"></div>
-
-                </div>
+    <header>
+        <b>TUTELARIS</b>
+    </header>
 
 
-                <!-- RELATIVE NAME -->
+    <main>
 
-                <label for="name">
-                    Relative's name
-                </label>
+        <!-- =================================================
+             SETUP SCREEN
+        ================================================== -->
 
-                <input
-                    id="name"
-                    type="text"
-                    placeholder="e.g. Mom, Dad, Sister"
-                    maxlength="30"
-                >
+        <section
+            id="setup"
+            class="screen active"
+        >
 
-
-                <!-- RELATIONSHIP -->
-
-                <label for="relation">
-                    Relationship
-                </label>
-
-                <input
-                    id="relation"
-                    type="text"
-                    placeholder="e.g. Mother, Brother, Friend"
-                    maxlength="30"
-                >
+            <div class="setup-icon">
+                📞
+            </div>
 
 
-                <!-- VEHICLE -->
-
-                <label for="vehicle">
-                    Vehicle
-                </label>
-
-                <select id="vehicle">
-
-                    <option value="auto-rickshaw">
-                        Auto-rickshaw
-                    </option>
-
-                    <option value="cab">
-                        Cab
-                    </option>
-
-                    <option value="taxi">
-                        Taxi
-                    </option>
-
-                    <option value="bus">
-                        Bus
-                    </option>
-
-                    <option value="train">
-                        Train
-                    </option>
-
-                    <option value="other">
-                        Other
-                    </option>
-
-                </select>
+            <h1>
+                Emergency Fake Call
+            </h1>
 
 
-                <!-- VOICE -->
+            <p class="sub">
 
-                <label>
-                    Voice
-                </label>
+                Start a discreet simulated call using
+                your saved emergency contact.
 
-                <div class="gender">
+            </p>
 
-                    <button
-                        id="female"
-                        type="button"
-                        onclick="selectGender('female')"
-                    >
-                        ♀ Female Voice
-                    </button>
 
-                    <button
-                        id="male"
-                        type="button"
-                        onclick="selectGender('male')"
-                    >
-                        ♂ Male Voice
-                    </button>
+            <!-- USER INFORMATION FROM DATABASE -->
+
+            <div class="user-card">
+
+                <div class="user-avatar">
+
+                    {{ (nickname or "C")[0].upper() }}
 
                 </div>
 
 
-                <div id="voiceStatus" class="voice-status">
-                    Voice: Female
-                </div>
+                <div class="user-details">
 
+                    <span>
+                        Calling as
+                    </span>
 
-                <!-- LANGUAGE -->
-
-                <label for="language">
-    Call language
-</label>
-
-<select
-    id="language"
-    onchange="selectLanguage(this.value)"
->
-    <option value="en-IN">
-        English (India)
-    </option>
-
-    <option value="hi-IN">
-        हिन्दी (Hindi)
-    </option>
-</select>
-
-
-                <!-- INFORMATION -->
-
-                <div class="info">
-
-                    Save only basic information.
-                    The demo uses the browser's synthetic voice
-                    and does not clone a real person's voice.
+                    <strong>
+                        {{ nickname or "Emergency Contact" }}
+                    </strong>
 
                 </div>
 
-
-                <!-- BUTTONS -->
-
-                <div class="button-row">
-
-                    <button
-                        class="primary"
-                        type="button"
-                        onclick="saveRelative()"
-                    >
-                        Save Relative
-                    </button>
-
-                    <button
-                        class="primary secondary"
-                        type="button"
-                        onclick="startFromForm()"
-                    >
-                        Start Call
-                    </button>
-
-                </div>
+            </div>
 
 
-                <div
-                    id="saveStatus"
-                    class="save-status"
-                ></div>
+            <!-- VEHICLE -->
 
-            </section>
+            <label for="vehicle">
+                Vehicle
+            </label>
 
 
-            <!-- ==============================
-                 INCOMING CALL SCREEN
-            =============================== -->
-
-            <section
-                id="incoming"
-                class="screen call"
+            <input
+                id="vehicle"
+                type="text"
+                placeholder="e.g. auto, cab, bus"
+                maxlength="30"
             >
 
-                <div class="badge">
-                    EMERGENCY SAFETY CALL
-                </div>
+
+            <!-- LANGUAGE -->
+
+            <label for="language">
+                Call language
+            </label>
 
 
-                <div
-                    class="avatar"
-                    id="avatar"
-                >
-                    AI
-                </div>
+            <select id="language">
+
+                <option value="en-IN">
+                    English (India)
+                </option>
+
+                <option value="hi-IN">
+                    हिन्दी (Hindi)
+                </option>
+
+            </select>
 
 
-                <h2 id="caller">
-                    Incoming Call
-                </h2>
+            <!-- INFORMATION -->
+
+            <div class="info">
+
+                Your saved emergency contact details
+                are taken automatically from your
+                logged-in account.
+
+                <br><br>
+
+                You only need to enter the vehicle
+                and select the language.
+
+            </div>
 
 
-                <div
-                    class="muted"
-                    id="rel"
-                >
-                    Your relative
-                </div>
+            <!-- START -->
 
-
-                <div class="wave">
-
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-
-                </div>
-
-
-                <div class="message">
-
-                    Your saved relative is calling.
-                    Answer to begin the discreet simulated conversation.
-
-                </div>
-
-
-                <div class="actions">
-
-                    <button
-                        class="round answer"
-                        type="button"
-                        onclick="answer()"
-                        aria-label="Answer call"
-                    >
-                        ☎
-                    </button>
-
-                    <button
-                        class="round hang"
-                        type="button"
-                        onclick="reset()"
-                        aria-label="Reject call"
-                    >
-                        ✕
-                    </button>
-
-                </div>
-
-            </section>
-
-
-            <!-- ==============================
-                 CONNECTED CALL SCREEN
-            =============================== -->
-
-            <section
-                id="connected"
-                class="screen call"
+            <button
+                class="start-button"
+                type="button"
+                onclick="startCall()"
             >
 
-                <div
-                    class="avatar"
-                    id="avatar2"
+                Start Fake Call
+
+            </button>
+
+
+            <div
+                id="errorMessage"
+                class="error-message"
+            ></div>
+
+        </section>
+
+
+        <!-- =================================================
+             INCOMING CALL SCREEN
+        ================================================== -->
+
+        <section
+            id="incoming"
+            class="screen call-screen"
+        >
+
+            <div class="emergency-badge">
+
+                EMERGENCY SAFETY CALL
+
+            </div>
+
+
+            <div
+                class="avatar"
+                id="incomingAvatar"
+            >
+
+                {{ (nickname or "C")[0].upper() }}
+
+            </div>
+
+
+            <h2 id="incomingName">
+
+                {{ nickname or "Emergency Contact" }}
+
+            </h2>
+
+
+            <div class="calling-text">
+
+                Incoming call
+
+            </div>
+
+
+            <div class="ringing">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+
+            <div class="message">
+
+                Your saved emergency contact is calling.
+
+                <br><br>
+
+                Answer to begin the discreet
+                simulated conversation.
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="round answer"
+                    type="button"
+                    onclick="answerCall()"
+                    aria-label="Answer call"
                 >
-                    AI
-                </div>
 
+                    ☎
 
-                <h2 id="caller2">
-                    Relative
-                </h2>
-
-
-                <div
-                    class="muted"
-                    id="timer"
-                >
-                    00:00
-                </div>
-
-
-                <div class="wave">
-
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-
-                </div>
-
-
-                <div
-                    class="message"
-                    id="spoken"
-                ></div>
-
-
-                <div class="actions">
-
-                    <button
-                        class="round hang"
-                        type="button"
-                        onclick="reset()"
-                        aria-label="End call"
-                    >
-                        ✕
-                    </button>
-
-                </div>
+                </button>
 
 
                 <button
-                    class="small"
+                    class="round hang"
                     type="button"
-                    onclick="speak()"
+                    onclick="endCall()"
+                    aria-label="Reject call"
                 >
-                    🔊 Repeat
+
+                    ✕
+
                 </button>
 
-            </section>
+            </div>
 
-        </main>
-
-    </div>
+        </section>
 
 
-    <!-- FLASK STATIC JAVASCRIPT -->
+        <!-- =================================================
+             CONNECTED CALL SCREEN
+        ================================================== -->
 
-    <script src="{{ url_for('static', filename='fake_call_script.js') }}"></script>
+        <section
+            id="connected"
+            class="screen call-screen"
+        >
+
+            <div
+                class="avatar connected-avatar"
+                id="connectedAvatar"
+            >
+
+                {{ (nickname or "C")[0].upper() }}
+
+            </div>
+
+
+            <h2 id="connectedName">
+
+                {{ nickname or "Emergency Contact" }}
+
+            </h2>
+
+
+            <div
+                class="timer"
+                id="timer"
+            >
+
+                00:00
+
+            </div>
+
+
+            <div class="wave">
+
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+
+            </div>
+
+
+            <div
+                class="spoken-message"
+                id="spoken"
+            >
+
+                Connected. Tap the button below
+                to start the conversation.
+
+            </div>
+
+
+            <!-- SPEAK BUTTON -->
+
+            <button
+                class="repeat-button"
+                id="speakButton"
+                type="button"
+                onclick="speakConversation()"
+            >
+
+                🔊 Start Conversation
+
+            </button>
+
+
+            <div class="actions single">
+
+                <button
+                    class="round hang"
+                    type="button"
+                    onclick="endCall()"
+                    aria-label="End call"
+                >
+
+                    ✕
+
+                </button>
+
+            </div>
+
+
+            <!-- REPEAT -->
+
+            <button
+                class="repeat-button"
+                id="repeatButton"
+                type="button"
+                onclick="repeatConversation()"
+                style="display:none;"
+            >
+
+                🔊 Repeat Conversation
+
+            </button>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+    src="{{ url_for('static', filename='fake_call_script.js') }}"
+></script>
+
 
 </body>
 

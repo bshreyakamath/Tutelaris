@@ -1,0 +1,827 @@
+/* =========================================================
+   TUTELARIS
+   EMERGENCY FAKE CALL
+========================================================= */
+
+:root {
+
+    --purple: #5b1685;
+    --purple-light: #76219e;
+
+    --red: #e91919;
+
+    --green: #19a85b;
+
+    --text: #17121b;
+
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255,255,255,.18),
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(255,255,255,.14),
+            transparent 4px
+        ),
+        linear-gradient(
+            145deg,
+            #360550,
+            #76209b
+        );
+
+    display: grid;
+
+    place-items: center;
+
+    padding: 18px;
+
+    color: var(--text);
+
+}
+
+
+/* =========================================================
+   PHONE
+========================================================= */
+
+.phone {
+
+    width: min(400px, 100%);
+
+    min-height: 720px;
+
+    background: white;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.47);
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+
+    height: 66px;
+
+    background: var(--purple);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+header b {
+
+    font-size: 20px;
+
+    letter-spacing: .5px;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main {
+
+    padding: 25px;
+
+}
+
+
+/* =========================================================
+   SCREENS
+========================================================= */
+
+.screen {
+
+    display: none;
+
+}
+
+
+.screen.active {
+
+    display: block;
+
+}
+
+
+/* =========================================================
+   SETUP
+========================================================= */
+
+.setup-icon {
+
+    width: 60px;
+
+    height: 60px;
+
+    margin: 5px auto 12px;
+
+    border-radius: 50%;
+
+    background: #f1e6f5;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 27px;
+
+}
+
+
+h1 {
+
+    text-align: center;
+
+    color: var(--purple);
+
+    font-size: 27px;
+
+    margin: 7px 0 9px;
+
+}
+
+
+.sub {
+
+    text-align: center;
+
+    font-size: 13px;
+
+    color: #666;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   USER CARD
+========================================================= */
+
+.user-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 22px;
+
+    padding: 13px;
+
+    background: #f7f1f9;
+
+    border-radius: 13px;
+
+}
+
+
+.user-avatar {
+
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 50%;
+
+    background: var(--purple);
+
+    color: white;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+}
+
+
+.user-details span {
+
+    display: block;
+
+    font-size: 11px;
+
+    color: #777;
+
+    margin-bottom: 3px;
+
+}
+
+
+.user-details strong {
+
+    font-size: 14px;
+
+    color: #333;
+
+}
+
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+label {
+
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin: 20px 0 8px;
+
+    color: #444;
+
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+input,
+select {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 11px;
+
+    font: inherit;
+
+    background: white;
+
+    color: var(--text);
+
+}
+
+
+input:focus,
+select:focus {
+
+    outline: none;
+
+    border-color: var(--purple);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(91,22,133,.08);
+
+}
+
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.info {
+
+    margin-top: 17px;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background: #f6f0f8;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    color: #555;
+
+}
+
+
+/* =========================================================
+   START BUTTON
+========================================================= */
+
+.start-button {
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 15px;
+
+    border: 0;
+
+    border-radius: 13px;
+
+    background: var(--purple);
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+
+}
+
+
+.start-button:hover {
+
+    background: var(--purple-light);
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-message {
+
+    text-align: center;
+
+    color: #d00000;
+
+    font-size: 11px;
+
+    min-height: 18px;
+
+    margin-top: 9px;
+
+}
+
+
+/* =========================================================
+   CALL SCREEN
+========================================================= */
+
+.call-screen {
+
+    text-align: center;
+
+    padding-top: 20px;
+
+}
+
+
+/* =========================================================
+   EMERGENCY BADGE
+========================================================= */
+
+.emergency-badge {
+
+    display: inline-block;
+
+    background: #fff0f0;
+
+    color: #d40000;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar {
+
+    width: 115px;
+
+    height: 115px;
+
+    border-radius: 50%;
+
+    margin: 30px auto 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e7d7ed,
+            #a555bf
+        );
+
+    display: grid;
+
+    place-items: center;
+
+    color: white;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 0 0 12px
+        rgba(91,22,133,.07);
+
+}
+
+
+.call-screen h2 {
+
+    margin: 6px 0;
+
+    font-size: 22px;
+
+}
+
+
+.calling-text {
+
+    color: #777;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   RINGING
+========================================================= */
+
+.ringing {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin: 25px 0;
+
+}
+
+
+.ringing span {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--purple);
+
+    animation: ringing 1s infinite;
+
+}
+
+
+.ringing span:nth-child(2) {
+
+    animation-delay: .2s;
+
+}
+
+
+.ringing span:nth-child(3) {
+
+    animation-delay: .4s;
+
+}
+
+
+@keyframes ringing {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+        opacity: .4;
+
+    }
+
+    50% {
+
+        transform: scale(1.8);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message {
+
+    background: #f7f3f9;
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin: 15px 0;
+
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 50px;
+
+    margin: 30px 0;
+
+}
+
+
+.actions.single {
+
+    margin-top: 25px;
+
+}
+
+
+.round {
+
+    width: 68px;
+
+    height: 68px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+
+}
+
+
+.round:hover {
+
+    transform: scale(1.08);
+
+}
+
+
+.answer {
+
+    background: var(--green);
+
+}
+
+
+.hang {
+
+    background: var(--red);
+
+}
+
+
+/* =========================================================
+   CONNECTED CALL
+========================================================= */
+
+.connected-avatar {
+
+    margin-top: 40px;
+
+}
+
+
+.timer {
+
+    color: #777;
+
+    font-size: 13px;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================================================
+   VOICE WAVE
+========================================================= */
+
+.wave {
+
+    height: 55px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin: 18px 0;
+
+}
+
+
+.wave i {
+
+    width: 5px;
+
+    height: 18px;
+
+    background: var(--purple);
+
+    border-radius: 8px;
+
+    animation:
+        waveAnimation
+        .8s
+        infinite
+        ease-in-out;
+
+}
+
+
+.wave i:nth-child(2) {
+    animation-delay: .1s;
+}
+
+
+.wave i:nth-child(3) {
+    animation-delay: .2s;
+}
+
+
+.wave i:nth-child(4) {
+    animation-delay: .3s;
+}
+
+
+.wave i:nth-child(5) {
+    animation-delay: .4s;
+}
+
+
+@keyframes waveAnimation {
+
+    50% {
+        height: 48px;
+    }
+
+}
+
+
+/* =========================================================
+   SPOKEN MESSAGE
+========================================================= */
+
+.spoken-message {
+
+    min-height: 70px;
+
+    background: #f7f3f9;
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+    text-align: left;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   SPEECH BUTTON
+========================================================= */
+
+.repeat-button {
+
+    border: 0;
+
+    background: var(--purple);
+
+    color: white;
+
+    border-radius: 12px;
+
+    padding: 12px 18px;
+
+    margin-top: 15px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.repeat-button:hover {
+
+    background: var(--purple-light);
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    body {
+        padding: 0;
+    }
+
+
+    .phone {
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        border-radius: 0;
+
+    }
+
+
+    main {
+        padding: 22px;
+    }
+
+}
