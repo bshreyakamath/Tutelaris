@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Tutelaris - My Safe Route</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='my_route.css') }}"
+    >
+
+    <!-- Leaflet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+</head>
+
+
+<body>
+
+<header class="top-bar">
+
+    <div class="brand">
+
+        <span class="shield">🛡️</span>
+
+        <span>TUTELARIS</span>
+
+    </div>
+
+    <a
+        href="/dashboard"
+        class="dashboard-btn"
+    >
+        ← Back to Dashboard
+    </a>
+
+</header>
+
+
+<section class="page-header">
+
+    <div>
+
+        <h1>My Safe Route</h1>
+
+        <p>
+            Plan your journey and stay monitored throughout your route.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="journey-card">
+
+    <div class="journey-title">
+
+        <div class="map-icon">
+            🗺️
+        </div>
+
+        <div>
+
+            <h2>Plan Your Journey</h2>
+
+            <p>
+                Enter your starting point and destination before beginning your journey.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="location-grid">
+
+        <!-- START -->
+
+        <div class="location-section">
+
+            <label>
+                📍 Current Location
+            </label>
+
+            <div class="input-wrapper">
+
+                <span>📍</span>
+
+                <input
+                    type="text"
+                    id="startLocation"
+                    placeholder="Enter starting location"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <button
+                id="useCurrentLocation"
+                class="current-location-btn"
+                type="button"
+            >
+                📍 Use My Current Location
+            </button>
+
+            <div
+                id="locationStatus"
+                class="location-status"
+            >
+                Current location not detected
+            </div>
+
+        </div>
+
+
+        <!-- DESTINATION -->
+
+        <div class="location-section">
+
+            <label>
+                🎯 Final Destination
+            </label>
+
+            <div class="destination-wrapper">
+
+                <div class="input-wrapper">
+
+                    <span>🎯</span>
+
+                    <input
+                        type="text"
+                        id="destination"
+                        placeholder="Enter destination"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+                <div
+                    id="destinationDropdown"
+                    class="destination-dropdown"
+                ></div>
+
+            </div>
+
+            <div
+                id="destinationStatus"
+                class="destination-status"
+            >
+                Enter your destination
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- VEHICLE -->
+
+    <div class="vehicle-section">
+
+        <h3>
+            How are you travelling?
+        </h3>
+
+        <div class="vehicle-options">
+
+            <button
+                class="vehicle-option selected"
+                data-vehicle="Cab"
+                type="button"
+            >
+                🚕
+                <span>Cab</span>
+            </button>
+
+            <button
+                class="vehicle-option"
+                data-vehicle="Auto"
+                type="button"
+            >
+                🛺
+                <span>Auto</span>
+            </button>
+
+            <button
+                class="vehicle-option"
+                data-vehicle="Bus"
+                type="button"
+            >
+                🚌
+                <span>Bus</span>
+            </button>
+
+            <button
+                class="vehicle-option"
+                data-vehicle="Other"
+                type="button"
+            >
+                🚗
+                <span>Other</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LIVE MAP -->
+
+<section class="map-card">
+
+    <div class="map-heading">
+
+        <div>
+
+            <h2>Live Journey Map</h2>
+
+            <p>
+                Your route, current location and nearby police stations will appear here.
+            </p>
+
+        </div>
+
+        <div
+            id="routeStatus"
+            class="route-status"
+        >
+            Waiting for route
+        </div>
+
+    </div>
+
+
+    <div id="map"></div>
+
+
+    <!-- MAP LEGEND -->
+
+    <div class="map-legend">
+
+        <div>
+            <span class="legend-route"></span>
+            Safe Route
+        </div>
+
+        <div>
+            <span>🚕</span>
+            Your Vehicle
+        </div>
+
+        <div>
+            <span>👮</span>
+            Police
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CURRENT STATUS -->
+
+<section class="status-card">
+
+    <div class="status-heading">
+
+        <span>🛡️</span>
+
+        <div>
+
+            <h2>Current Status</h2>
+
+            <p>
+                Live information about your journey and safety.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="status-grid">
+
+        <div class="status-item">
+
+            <span class="status-label">
+                Safety Status
+            </span>
+
+            <strong id="safetyStatus">
+                SAFE — READY
+            </strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+            <span class="status-label">
+                Journey Time
+            </span>
+
+            <strong id="journeyTime">
+                00:00
+            </strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+            <span class="status-label">
+                Distance Remaining
+            </span>
+
+            <strong id="distanceRemaining">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+            <span class="status-label">
+                Route Status
+            </span>
+
+            <strong id="routeFollowStatus">
+                Waiting for route
+            </strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+            <span class="status-label">
+                GPS Status
+            </span>
+
+            <strong id="gpsStatus">
+                Not Active
+            </strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+            <span class="status-label">
+                Vehicle
+            </span>
+
+            <strong id="vehicleStatus">
+                Cab
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- POLICE STATION -->
+
+    <div class="facility-grid">
+
+        <div class="facility-card">
+
+            <div class="facility-icon police-icon">
+                👮
+            </div>
+
+            <div>
+
+                <span>
+                    Nearest Police Station
+                </span>
+
+                <strong id="nearestPolice">
+                    Search along route...
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SAFE JOURNEY MONITORING -->
+
+<section class="monitoring-card">
+
+    <h2>
+        🛡️ Safe Journey Monitoring
+    </h2>
+
+    <p>
+        Once your journey starts, Tutelaris monitors your location
+        and compares your actual movement with the planned route.
+    </p>
+
+
+    <div class="monitoring-features">
+
+        <span>✓ GPS Monitoring</span>
+
+        <span>✓ Route Deviation Detection</span>
+
+        <span>✓ Traffic Awareness</span>
+
+        <span>✓ Nearby Police Stations</span>
+
+        <span>✓ Safety Monitoring</span>
+
+    </div>
+
+</section>
+
+
+<!-- LEAFLET -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<!-- TUTELARIS JS -->
+
+<script
+    src="{{ url_for('static', filename='my_route.js') }}">
+</script>
+
+
+</body>
+
+</html>
